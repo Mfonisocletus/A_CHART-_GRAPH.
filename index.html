@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Line Graph</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    header {
+        float: left;
+        width: 20%; /* Adjust the width as needed */
+    }
+
+    main {
+        float: left;
+        width: 80%; /* Adjust the width as needed */
+    }
+
+    /* Clear the float to prevent layout issues */
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+    .flex{
+        display:in;
+    }
+     /* Style the container */
+     .chart-container {
+            text-align: center;
+            align-items: center;
+            position: relative;
+            width: 100%; /* Set the width of your chart container */
+            height: 200%; /* Set the height of your chart container */
+            border: 1px solid #ccc; /* Optional: Add a border for better visualization */
+        }
+
+        /* Style the axes and labels */
+        .x-axis, .y-axis {
+            position: absolute;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            padding: 5px;
+        }
+
+        .x-axis {
+           
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            margin-bottom: -30px;
+            text-align:right;
+        }
+
+        .y-axis {
+            top: 0;
+            left: 0;
+            height: 100%;
+            writing-mode: vertical-rl; /* Rotate text for vertical display */
+            text-align: center;
+            margin-right: 10px;
+        }
+</style>
+</head>
+<body>
+  
+  <div class="chart-container">
+    <div class="x-axis">
+      x-axis(years.)
+    </div>
+    <div class="y-axis">
+      y-axis(dalys Values).
+    </div>
+    <!-- Your chart content goes here -->
+    <div class="flex">
+      <h1 style="text-align:center;"><b>DALYs VALUE OVER TIME.</b></h1>
+      </div>
+<div style="width: 80%; margin: auto;">
+  <canvas id="lineChart"></canvas>
+</div>
+  
+<script>
+  // Sample data
+  var years = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2018, 2019];
+  var dalyValues = [2255, 2298, 2288, 2345, 2356, 2400, 2487, 2314, 2555, 2536, 2541, 2389, 2647, 2633, 2688, 2756, 2698, 2801, 2741, 2862, 2862];
+
+  // Create a line chart
+  var ctx = document.getElementById('lineChart').getContext('2d');
+  var lineChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: [{
+        label: 'DALYs Values chart',
+        data: dalyValues,
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 2,
+        fill: false
+      }]
+    },
+    options: {
+      scales: {
+        x: {
+          type: 'linear',
+          position: 'bottom'
+        },
+        y: {
+          min: Math.min(...dalyValues),
+          max: Math.max(...dalyValues),
+          ticks: {
+            stepSize: 100
+          }
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>
